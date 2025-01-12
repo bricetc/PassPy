@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Password Attacks{% endblock %}
+
+{% block content %}
+<h2>Password Attacks</h2>
+<div class="attack-form">
+    <div id="error-message" style="color: red; display: none;"></div>
+    <form id="attack-form" method="POST" enctype="multipart/form-data">
+        <label for="hash">Enter the Hash:</label>
+        <input type="text" id="hash" name="hash" placeholder="Enter MD5, SHA-1, SHA-256 or Bcript hash" required>
+
+        <label for="attack_type">Select Attack Type:</label>
+        <select id="attack_type" name="attack_type" required>
+            <option value="brute_force">Brute-Force Attack</option>
+            <option value="dictionary">Dictionary Attack</option>
+        </select>
+
+        <div id="brute-force-options" style="display: none;">
+            <label for="max_length">Maximum Password Length:</label>
+            <input type="number" id="max_length" name="max_length" placeholder="Enter max length (e.g., 4)"  min="1" max="8">
+        </div>
+
+        <div id="dictionary-options" style="display: none;">
+            <label for="dictionary_file">Upload a Dictionary File (optional):</label>
+            <input type="file" id="dictionary_file" name="dictionary_file">
+        </div>
+
+        <button type="submit">Start Attack</button>
+    </form>
+
+    <div id="results" style="margin-top: 20px; display: none;">
+        <h3>Results:</h3>
+        <p><strong>Attack Type:</strong> <span id="result-type"></span></p>
+        <p><strong>Plaintext Password:</strong> <span id="result-plaintext"></span></p>
+        <p><strong>Attempts:</strong> <span id="result-attempts"></span></p>
+        <p><strong>Duration:</strong> <span id="result-duration"></span> seconds</p>
+    </div>
+</div>
+{% endblock %}

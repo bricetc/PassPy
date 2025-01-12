@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ session['user'] }}</h2>
+
+<!-- Add Password Button -->
+<button class="add-password-btn" onclick="toggleModal()">Add Password</button>
+
+<!-- Add Password Modal -->
+<div id="addPasswordModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="toggleModal()">&times;</span>
+        <h3>Add Password</h3>
+        <form method="POST" action="/add_password">
+            <div class="form-group">
+                <label for="account">Account</label>
+                <input type="text" id="account" name="account" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" class="generate-btn" onclick="generatePassword()">Generate</button>
+                </div>
+                <small id="generated-password"></small>
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="submit-btn">Add</button>
+                <button type="button" class="cancel-btn" onclick="toggleModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="password-table">
+    <thead>
+        <tr>
+            <th>Account</th>
+            <th>Username</th>
+            <th>Hash</th>
+            <th>Password (Ciphertext)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for password in passwords %}
+        <tr id="password-row-{{ password['id'] }}">
+            <td>{{ password['account'] }}</td>
+            <td>{{ password['username'] }}</td>
+            <td>{{ password['password_hash'] }}</td>
+            <td>
+                <span class="ciphertext" id="ciphertext-{{ password['id'] }}">{{ password['password_encr'] }}</span>
+            </td>
+            <td>
+                <button class="action-btn show-btn" onclick="showPassword({{ password['id'] }})">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <button class="action-btn edit-btn" onclick="editEntry({{ password['id'] }})">
+                    <i class="fas fa-edit"></i>
+                <button class="action-btn delete-btn" onclick="deletePassword({{ password['id'] }})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+        <tr id="edit-row-{{ password['id'] }}" class="edit-row" style="display: none;">
+            <td colspan="5">
+                <form onsubmit="updateEntry(event, {{ password['id'] }})">
+                    <label>
+                        Account:
+                        <input type="text" name="account" value="{{ password['account'] }}" required>
+                    </label>
+                    <label>
+                        Username:
+                        <input type="text" name="username" value="{{ password['username'] }}" required>
+                    </label>
+                    <label>
+                        Password:
+                        <input type="text" name="password" value="{{ password['ciphertext'] }}" required>
+                    </label>
+                    <button type="submit" class="save-btn">Save</button>
+                    <button type="button" class="cancel-btn" onclick="cancelEdit({{ password['id'] }})">Cancel</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title  %}PassPy App {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <header>
+        <div><a href="/" class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="PassPy"></a>
+        </div>
+        <span class="menu-icon" onclick="toggleMenu()">☰</span>
+        
+    </header>
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const flashMessages = document.querySelectorAll('.flash');
+                flashMessages.forEach((flash) => {
+                    setTimeout(() => {
+                        flash.classList.add('fade-out');
+                        setTimeout(() => flash.remove(), 300); // Remove after fade-out
+                    }, 3000); // Show for 3 seconds
+                });
+            });
+        </script>
+        
+        <div class="form-container">
+            <h2>S'enregistrer</h2>
+            <form method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Register</button>
+            </form>
+            <p>Vous possedez un compte? <a href="{{ url_for('login') }}">Se connecter ici</a></p>
+        </div>
+        
+    </main>
+    <footer>
+        <p>&copy; 2024 PASSPY - Cyber Management School </p>
+    </footer>
+</body>
+</html>
+
+

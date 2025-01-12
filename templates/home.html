@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Home - PassPy{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Bienvenue sur PassPy</h1>
+    <p>Votre systeme inteligent de gestion et analyse de mots de passe.</p>
+    <a href="{{ url_for('dashboard') }}" class="btn">Démarrer?</a>
+</section>
+
+
+{% endblock %}
+
+<!-- Cookies Banner -->
+{% if not cookies_accepted %}
+<div id="cookies-banner">
+    <p>
+        We use cookies to enhance your experience, analyze site usage, and personalize content. By clicking "Accept", you consent to our use of cookies.
+        <a href="/cookies-policy" target="_blank">Learn more</a>.
+    </p>
+    <button id="accept-cookies">Accept</button>
+</div>
+{% endif %}
+

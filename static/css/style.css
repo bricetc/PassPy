@@ -1,0 +1,300 @@
+html, body {
+    height: 100%; /* Ensure the body takes the full height of the viewport */
+    margin: 0; /* Remove default margin */
+}
+
+main {
+    flex-grow: 1; /* Push the footer to the bottom if content is not enough */
+    padding: 2rem;
+    /*background: #f4f4f9; */
+}
+
+body {
+    font-family: Garamond, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column; /* Arrange header, main, and footer in a column */
+}
+
+/*-------------------login frame ---------------*/
+.form-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.form-container input {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-container button {
+    width: 100%;
+    background: #6a11cb;
+    color: #fff;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-container button:hover {
+    background: #2575fc;
+}
+
+.flash-messages div {
+    text-align: center;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    color: #fff;
+    background: #875044; /* Red for error */
+    border-radius: 5px;
+}
+
+/*----------------------------------- Flash Message Container --------------------------*/
+.flash-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+/* Base Style for Flash Messages */
+.flash {
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Flash Success */
+.flash-success {
+    background-color: #4caf50; /* Green */
+    border: 1px solid #388e3c;
+}
+
+/* Flash Error */
+.flash-danger {
+    background-color: #f44336; /* Red */
+    border: 1px solid #d32f2f;
+}
+
+/* Flash Info */
+.flash-info {
+    background-color: #2196f3; /* Blue */
+    border: 1px solid #1976d2;
+}
+
+/* Flash Warning */
+.flash-warning {
+    background-color: #ffc107; /* Yellow */
+    color: #333;
+    border: 1px solid #ffa000;
+}
+
+/* Hover Effect */
+.flash:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Dismissible Animation (Optional) */
+.flash.fade-out {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ------------------------------------Header-------------------------*/
+header {
+    background: linear-gradient(to left, #514460, #7d9bce);
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    font-family: Garamond, serif;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.logo img {
+    height: 50px; /* Adjust the size of the logo */
+    width: auto;  /* Maintain aspect ratio */
+}
+
+/* Navigation Bar Styling */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: inherit;
+    padding: 1rem 2rem;
+}
+
+/* Logo Styling */
+.logo {
+    flex: 1; /* Pushes logo to the far left */
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex: 2; /* Center aligns the navigation links */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 1.5rem;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #d9d9d9;
+}
+
+/* Authentication Links Styling */
+.auth-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    flex: 1; /* Pushes auth links to the far right */
+}
+
+.auth-links a {
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: normal;
+    transition: all 0.3s ease;
+}
+
+/* Login Button */
+.login-btn {
+    color: #fff;
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+.login-btn:hover {
+    background: #fff;
+    color: #6a11cb;
+}
+
+/* Register Button */
+.register-btn {
+    color: #fff;
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+.register-btn:hover {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+/* Logout Button */
+.logout-btn {
+    color: #fff;
+    background: #f44336;
+    border: 2px solid #f44336;
+}
+
+.logout-btn:hover {
+    background: #fff;
+    color: #f44336;
+}
+
+.toggle-menu {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Icons Styling */
+.auth-links i {
+    font-size: 1rem; /* Adjust icon size */
+    display: inline-block;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #6a11cb;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 200px;
+        padding: 1rem;
+        border-radius: 5px;
+    }
+
+    .nav-links.active {
+        display: flex;
+        background: #4f4d52;
+    }
+
+    .auth-links {
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+
+    .toggle-menu {
+        display: block;
+    }
+}
+
+footer {
+    background: #333;
+    background: linear-gradient(to left, #514460, #7d9bce, #3c835c);
+    color: #fff;
+    font-family: Garamond, serif;
+    text-align: center;
+    padding: 1rem 0;
+}

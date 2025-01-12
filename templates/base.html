@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title  %}PassPy App {% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mdash.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tools.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/attk.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/attacks.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/cookies.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        
+            <div><a href="/" class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="PassPy"></a>
+            </div>
+            <!-- <span class="menu-icon" onclick="toggleMenu()">☰</span> -->
+            <button class="toggle-menu" aria-label="Toggle navigation">
+                ☰
+            </button>
+            <ul class="nav-links">
+                <li><a href="/", class="active">Accueil</a></li>
+                <li><a href="/dashboard">Consultation BD</a></li>
+                <li><a href="/password_tools">Génération et Force</a></li>
+                <li><a href="/attacks">Attaques</a></li>
+                <li><a href="/about">A propos</a></li>
+            </ul>
+            <div class="auth-links">
+                {% if 'user_id' in session %}
+                    <a href="/logout" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                {% else %}
+                    <a href="/login" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Se connecter</a>
+                    <a href="/register" class="register-btn">
+                        <i class="fas fa-user-plus"></i> S'enregistrer</a>
+                {% endif %}
+            </div>
+        
+    </header>
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const flashMessages = document.querySelectorAll('.flash');
+                flashMessages.forEach((flash) => {
+                    setTimeout(() => {
+                        flash.classList.add('fade-out');
+                        setTimeout(() => flash.remove(), 300); // Remove after fade-out
+                    }, 3000); // Show for 3 seconds
+                });
+            });
+        </script>
+        
+        {% block content %}{% endblock %}
+
+    </main>
+    <footer>
+        <p>&copy; 2024 PASSPY - Cyber Management School </p>
+    </footer>
+</body>
+</html>
+
+
