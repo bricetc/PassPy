@@ -20,11 +20,10 @@ def init_db():
 
 # for the first launch: init_db()
 # path = "C:\\Users\\....\\PycharmProjects\\PassPy\\training\\"
-path = "./training"
+# path = "./training"
 # Normalize and resolve to an absolute path
-path = os.path.abspath(path) + "\\"
+# path = os.path.abspath(path) + "\\"
 
-DATABASE = path + "\\"+ "password_manager.db"
 
 # Utility function to query the database
 def query_db(query, args=(), one=False):
@@ -284,7 +283,6 @@ def about():
     return render_template('about.html')
 
 
-
 #------------------------cookies policy route -------------
 @app.route('/cookies-policy')
 def cookies_policy():
@@ -295,4 +293,3 @@ if __name__ == '__main__':
     # app.run(host="127.0.0.2", port=7000, debug=True)
     port = int(os.environ.get('PORT', 7000))
     app.run(host='0.0.0.0', port=port)
-

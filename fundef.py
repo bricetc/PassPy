@@ -18,9 +18,18 @@ from typing import Tuple
 
 
 # path = "C:\\Users\\....\\PycharmProjects\\PassPy\\training\\"
-path = "./training"
+# path = "./training"
 # Normalize and resolve to an absolute path 
-path = os.path.abspath(path) + "\\"
+# path = os.path.abspath(path) + "\\"
+# DATABASE = path + "password_manager.db"
+
+path = "./training"
+if os.name == 'posix':
+    path = os.path.abspath(path) + "/"
+elif os.name == 'nt':
+    path = os.path.abspath(path) + "\\"
+else:
+    path = os.path.abspath(path) + "/"
 
 DATABASE = path + "password_manager.db"
 
